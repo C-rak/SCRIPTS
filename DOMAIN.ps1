@@ -1,4 +1,7 @@
-﻿#prepare CSV with computername,domainname,password,complexitypassword,NetBIOSname
+﻿
+ #create FOREST& DOMAIN 
+ #NOTE: complexitypassword means the single character password which you want to set.
+ #prepare CSV with computername,domainname,password,complexitypassword,NetBIOSname
 
 #NOTE: above stated parameters are used in script so it nessasry to provide same name as provided above.
 
