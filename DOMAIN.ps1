@@ -1,4 +1,9 @@
-﻿Enable-psremoting
+﻿## RUN THIS COMMAND IN EVERY MACHINE FORM enable-psremoting to set-item
+#To enbale psremoting it is necessary to add trusted host 
+#IN Line no.15 provide your client ipaddress example "192.168.1.1,192.168.1.2" for multiple clients or to apply any ip address just put "*"
+ 
+
+Enable-psremoting
 
 Set-NetConnectionProfile -NetworkCategory Private
 
@@ -12,14 +17,12 @@ New-Item -Path WSMan:\LocalHost\Listener -Transport HTTPS -Address * -Certificat
 
 Set-Item wsman:\localhost\Client\TrustedHosts -Value "192.168.1.1" -Concatenate -Force
 
-
-
 $SkipCA=New-PSSessionOption -SkipCACheck -SkipCNCheck
 
 
-#import csv 
-$computers=Import-Csv C:\comp.csv
-
+#import csv create csv file with computer name 
+$computers=Import-Csv C:\comp.csv 
+$renamecomp=Import-Csv c:\renamecomp.csv
 
 foreach($comp in $computers)
 
@@ -39,6 +42,8 @@ foreach($comp in $computers)
         }
         else
         {Invoke-Command -ComputerName $comp.computername -Credential $credential -Port 5986 -UseSSL -SessionOption $SkipCA -ScriptBlock {
+
+          Rename-Computer -NewName $renamecomp.computername -Restart -Force 
 
          Set-DnsClientServerAddress -InterfaceIndex 3 -ServerAddresses 192.168.1.1 
 
