@@ -1,0 +1,2 @@
+computername,domainname,password,complexitypassword,domainusername,NetBIOSname
+DC1,ntms.local,ntms123#,a,NTMS
