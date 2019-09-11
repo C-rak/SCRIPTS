@@ -26,10 +26,10 @@ Add-WindowsFeature -Name AD-Domain-Services -IncludeAllSubFeature -IncludeManage
 
 # To configure forest & DC
 
-{Install-ADDSForest -DomainName $computerdetails.domainname -SafeModeAdministratorPassword $domainpassword `
+Install-ADDSForest -DomainName $computerdetails.domainname -SafeModeAdministratorPassword $domainpassword `
        -DomainMode "WinThreshold" -ForestMode "WinThreshold" -DomainNetbiosName $computerdetails.NetBIOSname `
       -CreateDnsDelegation:$false -InstallDns:$true -DatabasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS"`
-       -SysvolPath "C:\Windows\SYSVOL" -NoRebootOnCompletion:$false -Force:$true }
+       -SysvolPath "C:\Windows\SYSVOL" -NoRebootOnCompletion:$false -Force:$true 
 
 #TO remove complexity of password
 $computerdetails=Import-Csv C:\computerdetails.csv
